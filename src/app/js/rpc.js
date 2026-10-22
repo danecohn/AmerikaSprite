@@ -1,4 +1,4 @@
-/* Amerika Sprite: handlers for the sprite.* control endpoint (see src/os/studio/tools.json). Pure logic, host injected. */
+/* Sprite: handlers for the sprite.* control endpoint (see src/os/studio/tools.json). Pure logic, host injected. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
   else { root.AS = root.AS || {}; root.AS.rpc = factory(function (n) { return root.AS[n]; }); }

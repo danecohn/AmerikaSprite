@@ -1,4 +1,4 @@
-/* Amerika Sprite: pixel drawing primitives, fills, masks, dithering and image transforms. Original code.
+/* Sprite: pixel drawing primitives, fills, masks, dithering and image transforms. Original code.
    Buffers are Uint32Array(w*h) of pixel values (see model.js). Shapes call put(x,y) per pixel (caller clips). */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });

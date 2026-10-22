@@ -1,4 +1,4 @@
-/* Amerika Sprite: PNG / APNG encoder and PNG decoder (pure JS, no canvas needed). Original code. */
+/* Sprite: PNG / APNG encoder and PNG decoder (pure JS, no canvas needed). Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
   else { root.AS = root.AS || {}; root.AS.png = factory(function (n) { return root.AS[n]; }); }

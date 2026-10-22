@@ -1,4 +1,4 @@
-/* Amerika Sprite: spritesheet / animation exporters (PNG sheet, Aseprite-compatible JSON array, Godot SpriteFrames .tres,
+/* Sprite: spritesheet / animation exporters (PNG sheet, Aseprite-compatible JSON array, Godot SpriteFrames .tres,
    AtlasTexture snippet, GIF/APNG frame lists). Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
@@ -102,7 +102,7 @@
           spriteSourceSize: { x: f.ox, y: f.oy, w: f.rw, h: f.rh }, sourceSize: { w: f.sw, h: f.sh }, duration: f.duration };
       }),
       meta: {
-        app: 'Amerika Sprite (Aseprite-compatible JSON array; not affiliated with Aseprite)', version: '1.0', image: imageName, format: 'RGBA8888',
+        app: 'Sprite (Aseprite-compatible JSON array; not affiliated with Aseprite)', version: '1.0', image: imageName, format: 'RGBA8888',
         size: { w: width, h: height }, scale: String(s),
         frameTags: tags.map(function (t) { return { name: t.name, from: t.from, to: t.to, direction: t.direction }; }),
         layers: doc.layers.map(function (l) { return { name: l.name, opacity: l.opacity, blendMode: l.blend }; }), slices: []
@@ -143,7 +143,7 @@
   function buildAtlasSnippet(sheet, opts) {
     var dir = opts.godotPath === undefined ? 'res://' : opts.godotPath; if (dir && dir[dir.length - 1] !== '/') dir += '/';
     var f0 = sheet.frames[0];
-    var s = '# Amerika Sprite: AtlasTexture helper for ' + sheet.image + ' (' + sheet.frames.length + ' frames)\n' +
+    var s = '# Sprite: AtlasTexture helper for ' + sheet.image + ' (' + sheet.frames.length + ' frames)\n' +
       'const SHEET: Texture2D = preload("' + dir + sheet.image + '")\n' +
       'const FRAME_RECTS := [\n' + sheet.frames.map(function (f) { return '\tRect2(' + f.rx + ', ' + f.ry + ', ' + f.rw + ', ' + f.rh + ')'; }).join(',\n') + '\n]\n\n' +
       'func frame_texture(i: int) -> AtlasTexture:\n\tvar t := AtlasTexture.new()\n\tt.atlas = SHEET\n\tt.region = FRAME_RECTS[i]\n\treturn t\n\n' +

@@ -152,7 +152,7 @@ test('AI assistant prefers a supplied AIClient (the shell one) and passes tools 
 
 // ------------------------------------------------------------------ control endpoint
 test('control endpoint: sprite.* handlers from tools.json', async () => {
-  const toolsJson = require('../../studio/tools.json'); const S = newSession(8, 8, 'rgba'); const files = {};
+  const toolsJson = require('../studio-tools.json'); const S = newSession(8, 8, 'rgba'); const files = {};
   const host = { get session() { return S; }, io: { write: async (p, d) => { files[p] = d; return { path: p }; } }, prompt: async (m, t) => { await run(S, 'draw_shape', { shape: 'rect', x0: 0, y0: 0, x1: 3, y1: 3, color: '#ff0000', fill: true }); return { reply: 'drew: ' + m.slice(0, 30), tool_calls: ['draw_shape'] }; } };
   const rpc = RPC.createRpc(host);
   const contract = toolsJson.apps.sprite.tools.map(t => t.name);

@@ -1,4 +1,4 @@
-/* Amerika Sprite: document model (layers, frames, tags, palette, cels), compositing, undo/redo command stack,
+/* Sprite: document model (layers, frames, tags, palette, cels), compositing, undo/redo command stack,
    native .asprite.json (de)serialisation. Original code.
    Cel pixel values: rgba mode = packed RGBA uint32 (0 = transparent); indexed mode = palette index + 1 (0 = transparent). */
 (function (root, factory) {
@@ -417,7 +417,7 @@
   };
   Doc.fromJSON = function (j) {
     if (typeof j === 'string') j = JSON.parse(j);
-    if (!j || j.format !== 'amerika-sprite') throw new Error('not an Amerika Sprite project');
+    if (!j || j.format !== 'amerika-sprite') throw new Error('not a Sprite project');
     var d = new Doc({ w: j.width, h: j.height, mode: j.mode, palette: (j.palette || []).map(C.parse).filter(function (c) { return c !== null; }) });
     d.name = j.name || 'Sprite'; d.layers = []; d.frames = [];
     (j.layers || []).forEach(function (l) { d.layers.push({ id: d.nextId++, name: String(l.name || 'Layer'), visible: l.visible !== false, opacity: clamp(l.opacity === undefined ? 255 : l.opacity, 0, 255), blend: BLEND_MODES.indexOf(l.blend) >= 0 ? l.blend : 'normal', locked: !!l.locked }); });

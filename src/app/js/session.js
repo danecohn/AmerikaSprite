@@ -1,4 +1,4 @@
-/* Amerika Sprite: editing session = document + current frame/layer/colour/selection. Shared by UI, AI tools and RPC. */
+/* Sprite: editing session = document + current frame/layer/colour/selection. Shared by UI, AI tools and RPC. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
   else { root.AS = root.AS || {}; root.AS.session = factory(function (n) { return root.AS[n]; }); }

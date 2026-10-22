@@ -1,4 +1,4 @@
-/* Amerika Sprite: tiny dependency-free zlib (inflate + fixed-Huffman LZ77 deflate), crc32, adler32. Original code. */
+/* Sprite: tiny dependency-free zlib (inflate + fixed-Huffman LZ77 deflate), crc32, adler32. Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
   else { root.AS = root.AS || {}; root.AS.zlib = factory(function (n) { return root.AS[n]; }); }

@@ -1,4 +1,4 @@
-/* Amerika Sprite: minimal stand-in for window.amerikaStudio when the page is opened in a plain browser (development only).
+/* Sprite: minimal stand-in for window.amerikaStudio when the page is opened in a plain browser (development only).
    The real shell (amerika-studio-webview) injects the real thing before this file runs, so this does nothing there. */
 (function () {
   'use strict';

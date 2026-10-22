@@ -1,8 +1,8 @@
-# Amerika Sprite
+# Sprite
 
 A pixel-art editor and animator with an AI sprite builder. Package `amerika-sprite` (arch all; Depends `amerika-studio`, `gir1.2-webkit-6.0`), launcher `amerika-sprite`, app id `org.amerika.Sprite`, project folder `~/Studio/Sprite`.
 
-**Licensing.** Amerika Sprite is original code. It is **not Aseprite** and is not affiliated with Aseprite or Igara Studio. No Aseprite source was copied, ported or translated; Aseprite was only a feature reference. The `.aseprite`/`.ase` reader is **import only** and was written from the public file-format spec (`docs/ase-file-specs.md`); there is deliberately no `.aseprite` writer. Native format: `.asprite.json` (deflated cels, base64) plus PNG/sheet exports.
+**Licensing.** Sprite is original code. It is **not Aseprite** and is not affiliated with Aseprite or Igara Studio. No Aseprite source was copied, ported or translated; Aseprite was only a feature reference. The `.aseprite`/`.ase` reader is **import only** and was written from the public file-format spec (`docs/ase-file-specs.md`); there is deliberately no `.aseprite` writer. Native format: `.asprite.json` (deflated cels, base64) plus PNG/sheet exports.
 
 ## Layout of the source (`src/os/sprite/`)
 - `app/` static page (no CDN, no build step): `index.html`, `style.css`, `icon.svg`, `js/*.js`.

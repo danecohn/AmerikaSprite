@@ -1,4 +1,4 @@
-/* Amerika Sprite: animated GIF89a encoder (own LZW + median-cut quantiser). Original code. */
+/* Sprite: animated GIF89a encoder (own LZW + median-cut quantiser). Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
   else { root.AS = root.AS || {}; root.AS.gif = factory(function (n) { return root.AS[n]; }); }

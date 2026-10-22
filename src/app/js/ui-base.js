@@ -1,4 +1,4 @@
-/* Amerika Sprite UI toolkit: DOM helper, modal dialogs, menus, toasts, keymap, pixel icons. Original code. */
+/* Sprite UI toolkit: DOM helper, modal dialogs, menus, toasts, keymap, pixel icons. Original code. */
 (function (root, factory) {
   root.AS = root.AS || {}; root.AS.ui = factory(function (n) { return root.AS[n]; });
 })(window, function (dep) {

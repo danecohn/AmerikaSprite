@@ -1,4 +1,4 @@
-/* Amerika Sprite: the structured, validated tool set used by the AI panel and by the sprite.* control endpoint.
+/* Sprite: the structured, validated tool set used by the AI panel and by the sprite.* control endpoint.
    Every tool call is applied through doc.edit() (atomic: a failing call changes nothing). Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });

@@ -1,4 +1,4 @@
-/* Amerika Sprite: colour helpers, built-in retro palettes and palette importers/exporters. Original code.
+/* Sprite: colour helpers, built-in retro palettes and palette importers/exporters. Original code.
    Packed colour = little-endian RGBA in one uint32: r | g<<8 | b<<16 | a<<24 (always >>> 0). 0 = fully transparent. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
@@ -76,7 +76,7 @@
     { id: 'c64', name: 'Commodore 64', colors: L('000000 ffffff 68372b 70a4b2 6f3d86 588d43 352879 b8c76f 6f4f25 433900 9a6759 444444 6c6c6c 9ad284 6c5eb5 959595') },
     { id: 'gray8', name: 'Grayscale 8', colors: L('000000 242424 494949 6d6d6d 929292 b6b6b6 dbdbdb ffffff') },
     { id: 'fire', name: 'Fire', colors: L('0b0000 2b0a00 5a1200 8f1d00 c43300 f06a00 ffa400 ffd34d fff3a8 ffffff') },
-    { id: 'amerika', name: 'Amerika neon', colors: L('0a0b12 1a1d2e 2c3150 4b5278 8a93b8 d6dbf0 ff2e63 ff9a3c ffe14d 3cf0a8 18d0ff 4b6bff a259ff ff6bd6') }
+    { id: 'amerika', name: 'Blossom', colors: L('0a0b12 1a1d2e 2c3150 4b5278 8a93b8 d6dbf0 ff2e63 ff9a3c ffe14d 3cf0a8 18d0ff 4b6bff a259ff ff6bd6') }
   ];
   function builtin(id) { for (var i = 0; i < PALETTES.length; i++) if (PALETTES[i].id === id) return PALETTES[i]; return null; }
 

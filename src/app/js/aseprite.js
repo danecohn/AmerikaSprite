@@ -1,6 +1,6 @@
-/* Amerika Sprite: IMPORT-ONLY reader for the documented .ase/.aseprite file format.
+/* Sprite: IMPORT-ONLY reader for the documented .ase/.aseprite file format.
    Written from the public file-format specification (docs/ase-file-specs.md); no Aseprite source code was used.
-   Amerika Sprite is not Aseprite and is not affiliated with it. There is deliberately no .aseprite writer. */
+   Sprite is not Aseprite and is not affiliated with it. There is deliberately no .aseprite writer. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
   else { root.AS = root.AS || {}; root.AS.aseprite = factory(function (n) { return root.AS[n]; }); }

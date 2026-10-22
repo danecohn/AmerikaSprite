@@ -1,4 +1,4 @@
-/* Amerika Sprite: canvas editor view (zoom/pan/grid/onion/tiling/selection overlays) and the drawing tools. Original code. */
+/* Sprite: canvas editor view (zoom/pan/grid/onion/tiling/selection overlays) and the drawing tools. Original code. */
 (function (root, factory) {
   root.AS = root.AS || {}; root.AS.editor = factory(function (n) { return root.AS[n]; });
 })(window, function (dep) {

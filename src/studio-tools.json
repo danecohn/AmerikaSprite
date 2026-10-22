@@ -1,0 +1,294 @@
+{
+  "apps": {
+    "sprite": {
+      "title": "Amerika Sprite",
+      "launcher": "amerika-sprite",
+      "tools": [
+        {
+          "name": "canvas.info",
+          "description": "Size, palette, frame count, layers, current frame and file path of the open sprite.",
+          "risk": "read",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "canvas.describe_to_sprite",
+          "description": "Draw a sprite from a text description on the current frame (the assistant produces pixel data).",
+          "risk": "act",
+          "timeout": 600,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string",
+                "description": "What to draw"
+              },
+              "width": {
+                "type": "integer",
+                "description": "Canvas width px",
+                "minimum": 1,
+                "maximum": 512
+              },
+              "height": {
+                "type": "integer",
+                "description": "Canvas height px",
+                "minimum": 1,
+                "maximum": 512
+              },
+              "palette": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Hex colour like #1a2b3c"
+                },
+                "description": "Optional palette to use"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "description"
+            ]
+          }
+        },
+        {
+          "name": "canvas.apply_change",
+          "description": "Change the current frame according to an instruction (recolour, shift, outline, mirror...).",
+          "risk": "act",
+          "timeout": 600,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "instruction": {
+                "type": "string",
+                "description": "The change to make"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "instruction"
+            ]
+          }
+        },
+        {
+          "name": "frames.list",
+          "description": "List frames with index, duration and thumbnail flag.",
+          "risk": "read",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "frames.add",
+          "description": "Add a blank frame (or a copy of one) at the given index.",
+          "risk": "act",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "description": "Insert position",
+                "minimum": 0
+              },
+              "copy_from": {
+                "type": "integer",
+                "description": "Frame index to copy",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "frames.delete",
+          "description": "Delete a frame.",
+          "risk": "act",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "description": "Frame index",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "index"
+            ]
+          }
+        },
+        {
+          "name": "frames.duplicate",
+          "description": "Duplicate a frame.",
+          "risk": "act",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "description": "Frame index",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "index"
+            ]
+          }
+        },
+        {
+          "name": "frames.select",
+          "description": "Make a frame current.",
+          "risk": "act",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "description": "Frame index",
+                "minimum": 0
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "index"
+            ]
+          }
+        },
+        {
+          "name": "frames.set_duration",
+          "description": "Set a frame's duration in milliseconds.",
+          "risk": "act",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "index": {
+                "type": "integer",
+                "description": "Frame index",
+                "minimum": 0
+              },
+              "ms": {
+                "type": "integer",
+                "description": "Duration ms",
+                "minimum": 10,
+                "maximum": 60000
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "index",
+              "ms"
+            ]
+          }
+        },
+        {
+          "name": "palette.get",
+          "description": "Return the palette as hex colours.",
+          "risk": "read",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {},
+            "additionalProperties": false
+          }
+        },
+        {
+          "name": "palette.set",
+          "description": "Replace the palette.",
+          "risk": "act",
+          "timeout": 60,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "colors": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Hex colour like #1a2b3c"
+                },
+                "maxItems": 256,
+                "description": "New palette"
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "colors"
+            ]
+          }
+        },
+        {
+          "name": "export",
+          "description": "Export PNG, animated GIF or a sprite sheet into the project folder.",
+          "risk": "act",
+          "timeout": 120,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "format": {
+                "type": "string",
+                "description": "Output format",
+                "enum": [
+                  "png",
+                  "gif",
+                  "sheet"
+                ]
+              },
+              "path": {
+                "type": "string",
+                "description": "Path relative to the project directory (never absolute, never containing ..)"
+              },
+              "scale": {
+                "type": "integer",
+                "description": "Integer upscale factor",
+                "minimum": 1,
+                "maximum": 32
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "format",
+              "path"
+            ]
+          }
+        },
+        {
+          "name": "app.prompt",
+          "description": "Send a natural-language instruction to this app's built-in Claude assistant (the same chat panel the user sees) and return its final reply plus a summary of the tool calls it made.",
+          "risk": "act",
+          "timeout": 600,
+          "inputSchema": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "Instruction for the assistant"
+              },
+              "timeout_s": {
+                "type": "integer",
+                "description": "Max seconds to wait",
+                "minimum": 5,
+                "maximum": 900
+              }
+            },
+            "additionalProperties": false,
+            "required": [
+              "message"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

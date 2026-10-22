@@ -1,4 +1,4 @@
-/* Amerika Sprite: side panels and timeline (toolbox, palette, tool options, preview, layers/frames, AI chat). Original code. */
+/* Sprite: side panels and timeline (toolbox, palette, tool options, preview, layers/frames, AI chat). Original code. */
 (function (root, factory) {
   root.AS = root.AS || {}; root.AS.panels = factory(function (n) { return root.AS[n]; });
 })(window, function (dep) {
@@ -189,7 +189,7 @@
     var stop = h('button', { class: 'btn danger', hidden: true, onclick: function () { app.ai.stop(); } }, 'Stop');
     var fresh = h('button', { class: 'tool tiny', title: 'New chat', 'aria-label': 'New chat', onclick: function () { app.ai.reset(); log.textContent = ''; hello(); } }, U.icon('plus', 0.75));
     var keys = h('button', { class: 'btn small', hidden: true, onclick: function () { checkStatus(true); } }, 'Check key again');
-    el.append(h('div', { class: 'phead' }, h('span', { class: 'ptitle' }, U.icon('ai', 0.75), ' Amerika AI'), status, fresh), log, keys, input, h('div', { class: 'chat-btns' }, stop, send));
+    el.append(h('div', { class: 'phead' }, h('span', { class: 'ptitle' }, U.icon('ai', 0.75), ' Studio AI'), status, fresh), log, keys, input, h('div', { class: 'chat-btns' }, stop, send));
     var EXAMPLES = ['32x32 knight with a red plume, idle + walk animation, SNES style', 'Make the sword longer', 'Recolour it to a fire palette', 'Add a 4-frame walk cycle', 'Make a 16x16 forest tileset'];
     function hello() {
       var m = h('div', { class: 'msg sys' }, h('p', null, 'Tell me what to draw. I build it with tools you can undo in one step, and I look at the canvas as I go.'),
@@ -220,9 +220,9 @@
       return shell.request('/v1/status').then(function (r) {
         var ok = r && r.json && r.json.key && r.json.key.sprite;
         app.keyReady = !!ok; app.keyState = ok ? 'key ready' : 'no key'; status.textContent = app.keyState; keys.hidden = !!ok; el.classList.toggle('nokey', !ok);
-        if (!ok && force) app.chatError('No Anthropic key is set for Amerika Sprite yet. Use the "Keys..." button in the window toolbar (or Amerika Studio), then press "Check key again".');
+        if (!ok && force) app.chatError('No Anthropic key is set for Sprite yet. Use the "Keys..." button in the window toolbar (or Studio), then press "Check key again".');
         if (ok && force) U.toast('Key found. The assistant is ready.');
-      }, function (e) { app.keyReady = false; app.keyState = 'bridge offline'; status.textContent = app.keyState; keys.hidden = false; if (force) app.chatError('The Amerika Studio bridge is not reachable (' + ((e && e.message) || 'offline') + '). Start Amerika Studio first.'); });
+      }, function (e) { app.keyReady = false; app.keyState = 'bridge offline'; status.textContent = app.keyState; keys.hidden = false; if (force) app.chatError('The Studio bridge is not reachable (' + ((e && e.message) || 'offline') + '). Start Studio first.'); });
     }
     app.checkAIStatus = checkStatus;
     hello(); app.keyState = ''; checkStatus(false);

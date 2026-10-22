@@ -1,4 +1,4 @@
-"""Amerika Sprite: runs the Node logic tests, verifies exported files with PIL, checks packaging and licensing text."""
+"""Sprite: runs the Node logic tests, verifies exported files with PIL, checks packaging and licensing text."""
 import json
 import os
 import shutil
@@ -8,7 +8,7 @@ import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SPRITE = ROOT / 'src/os/sprite'
+SPRITE = ROOT / 'src'
 NODE = next((str(p) for p in (ROOT.parent / 'tools/node/bin/node', Path(shutil.which('node') or '/nonexistent')) if p.is_file()), None)
 
 
@@ -72,9 +72,9 @@ class SpritePackagingTests(unittest.TestCase):
         launcher = (SPRITE / 'bin/amerika-sprite').read_text()
         self.assertIn('amerika-studio-webview --app sprite', launcher)
         desktop = (SPRITE / 'applications/amerika-sprite.desktop').read_text()
-        self.assertIn('Name=Amerika Sprite', desktop)
+        self.assertIn('Name=Sprite', desktop)
         self.assertIn('Icon=amerika-sprite', desktop)
-        doc = (ROOT / 'docs/studio/sprite.md').read_text()
+        doc = (ROOT / 'docs/sprite.md').read_text()
         self.assertIn('not Aseprite', doc)
         self.assertIn('import only', doc)
 

@@ -1,4 +1,4 @@
-/* Amerika Sprite: AI assistant glue. System prompt, tool loop (uses the shell's AIClient, with a local fallback that only
+/* Sprite: AI assistant glue. System prompt, tool loop (uses the shell's AIClient, with a local fallback that only
    talks to the bridge through amerikaStudio.request), and "one history step per AI turn". No API keys anywhere. Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
@@ -8,7 +8,7 @@
   var Tools = dep('tools');
 
   var SYSTEM_PROMPT = [
-    'You are the pixel artist inside Amerika Sprite, a pixel-art editor. The user describes what they want and you build or change the sprite by calling tools. You can see the sprite with view_canvas (an upscaled image with a pixel ruler) and with the ASCII picture that most tools return. You draw by choosing palette indices; you never write code.',
+    'You are the pixel artist inside Sprite, a pixel-art editor. The user describes what they want and you build or change the sprite by calling tools. You can see the sprite with view_canvas (an upscaled image with a pixel ruler) and with the ASCII picture that most tools return. You draw by choosing palette indices; you never write code.',
     '',
     'WORKFLOW (iterate, do not draw everything blind):',
     '1. Look: call canvas_info (size, palette, layers, frames, ASCII of the current frame). If the user edits existing art, view_canvas first.',
