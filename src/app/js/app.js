@@ -333,7 +333,7 @@
     'help.about': function () {
       return U.dialog({ title: 'About Sprite', cancel: false, ok: 'Close', fields: [
         { type: 'note', text: 'Sprite ' + VERSION + ' - a pixel-art editor with an AI sprite builder, part of Studio (Developer Edition).' },
-        { type: 'note', text: 'Original code by Amerika LLC. Sprite is not Aseprite and is not affiliated with Aseprite or Igara Studio. It can read (import only) the documented .aseprite file format so you can bring your files in; it never writes it.' },
+        { type: 'note', text: 'Original code by AltStack LLC. Sprite is not Aseprite and is not affiliated with Aseprite or Igara Studio. It can read (import only) the documented .aseprite file format so you can bring your files in; it never writes it.' },
         { type: 'note', text: 'Your project files are .asprite.json. Exports: PNG, GIF, APNG, sprite sheets with Aseprite-compatible JSON and Godot SpriteFrames (.tres).' }] });
     }
   };
@@ -462,7 +462,7 @@
     var menubar = U.buildMenubar(this.menuSpec(), function (a, arg) { self.act(a, arg); }, function (a) { var k = self.keymap.map[a]; return k ? U.prettyKey(k) : ''; });
     this.menubar = menubar;
     this.titleEl = h('span', { class: 'doc-title' }, S.doc.name);
-    var logo = h('div', { class: 'brand' }, h('img', { src: 'icon.svg', alt: '', width: 22, height: 22 }), h('span', { class: 'bname' }, 'AMERIKA ', h('b', null, 'SPRITE')));
+    var logo = h('div', { class: 'brand' }, h('img', { src: 'icon.svg', alt: '', width: 22, height: 22 }), h('span', { class: 'bname' }, 'ALTSTACK ', h('b', null, 'SPRITE')));
     var undoB = h('button', { class: 'tool tiny', title: 'Undo (Ctrl+Z)', 'aria-label': 'Undo', onclick: function () { self.act('undo'); } }, '↶'), redoB = h('button', { class: 'tool tiny', title: 'Redo (Ctrl+Y)', 'aria-label': 'Redo', onclick: function () { self.act('redo'); } }, '↷');
     var top = h('header', { class: 'top' }, logo, menubar, h('span', { class: 'grow' }), this.titleEl, undoB, redoB);
     // view strip
