@@ -12,6 +12,7 @@ def register(b):
                   depends=f'amerika-studio (>= {b.DE_VERSION}), gir1.2-webkit-6.0')
         shutil.copytree(src / 'app', p.path('/usr/share/amerika-sprite/app'), ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
         p.copy(src / 'bin/amerika-sprite', '/usr/bin/amerika-sprite', 0o755)
+        p.copy(src / 'icons/artemis-sprite.png', '/usr/share/icons/hicolor/512x512/apps/artemis-sprite.png')
         p.copy(src / 'applications/amerika-sprite.desktop', '/usr/share/applications/amerika-sprite.desktop')
         docs = b.ROOT / 'docs/studio/sprite.md'
         if docs.is_file():
