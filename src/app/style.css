@@ -150,3 +150,6 @@ body.no-docks .main { grid-template-columns: 70px 1fr 0; } body.no-docks .dock {
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 ::-webkit-scrollbar { width: 9px; height: 9px; } ::-webkit-scrollbar-thumb { background: #2f3760; border-radius: 5px; border: 2px solid transparent; background-clip: content-box; } ::-webkit-scrollbar-track { background: transparent; }
 .chat-log > * { flex: none; }
+
+/* Artemis Softworks LLC · Moonrise */
+:root{--bg:#e5ebe7;--bg2:#f5f0e6;--panel:#f8f8f2;--panel2:#e5eae4;--line:#c5cec5;--line2:#aab9b3;--text:#273941;--dim:#677a7b;--ico:#526e7b;--ico-accent:#86623b;--neon:#526e7b;--pink:#86623b;--lime:#657a61;--amber:#b89463;--violet:#71758c;--chrome:linear-gradient(#fffdf7,#dce5df);--sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
