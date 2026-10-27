@@ -66,14 +66,14 @@ class SpriteNodeTests(unittest.TestCase):
 
 class SpritePackagingTests(unittest.TestCase):
     def test_files_and_licensing_text(self):
-        for rel in ('app/index.html', 'app/style.css', 'app/icon.svg', 'bin/amerika-sprite', 'applications/amerika-sprite.desktop', 'icons/amerika-sprite.svg'):
+        for rel in ('app/index.html', 'app/style.css', 'app/icon.png', 'app/favicon.ico', 'bin/amerika-sprite', 'applications/amerika-sprite.desktop', 'icons/vigil-sprite-512.png'):
             self.assertTrue((SPRITE / rel).is_file(), rel)
         self.assertTrue(os.access(SPRITE / 'bin/amerika-sprite', os.X_OK))
         launcher = (SPRITE / 'bin/amerika-sprite').read_text()
         self.assertIn('amerika-studio-webview --app sprite', launcher)
         desktop = (SPRITE / 'applications/amerika-sprite.desktop').read_text()
-        self.assertIn('Name=Cohnsoft Sprite', desktop)
-        self.assertIn('Icon=artemis-sprite', desktop)
+        self.assertIn('Name=Vigil Sprite', desktop)
+        self.assertIn('Icon=vigil-sprite', desktop)
         self.assertIn('StartupWMClass=org.amerika.Sprite', desktop)
         doc = (ROOT / 'docs/sprite.md').read_text()
         self.assertIn('not Aseprite', doc)

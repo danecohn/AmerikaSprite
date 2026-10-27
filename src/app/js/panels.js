@@ -30,6 +30,13 @@
     el.refresh = refresh;
     return el;
   }
+  /** black or white label, whichever reads better on a user-chosen tag colour */
+  function tagInk(c) {
+    var m = /^#?([0-9a-f]{6})/i.exec(String(c || '')); if (!m) return '#000';
+    var v = parseInt(m[1], 16), ch = [v >> 16 & 255, v >> 8 & 255, v & 255].map(function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); });
+    var L = 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
+    return (L + 0.05) / 0.05 >= 1.05 / (L + 0.05) ? '#000' : '#fff';
+  }
   function swatchCSS(c) {
     if (!(c >>> 24)) return 'repeating-conic-gradient(#4a4f6a 0% 25%, #20243a 0% 50%) 50% / 8px 8px';
     var u = C.unpack(c); return u[3] === 255 ? C.hex(c) : 'linear-gradient(' + 'rgba(' + u[0] + ',' + u[1] + ',' + u[2] + ',' + (u[3] / 255).toFixed(2) + '),' + 'rgba(' + u[0] + ',' + u[1] + ',' + u[2] + ',' + (u[3] / 255).toFixed(2) + ')), repeating-conic-gradient(#4a4f6a 0% 25%, #20243a 0% 50%) 50% / 8px 8px';
@@ -102,7 +109,7 @@
     var cache = { key: '', c: null };
     function draw() {
       var doc = S.doc; g.imageSmoothingEnabled = false; g.clearRect(0, 0, cv.width, cv.height);
-      g.fillStyle = '#10131f'; g.fillRect(0, 0, cv.width, cv.height);
+      var cs = getComputedStyle(document.documentElement); g.fillStyle = cs.getPropertyValue('--work').trim() || '#120a14'; g.fillRect(0, 0, cv.width, cv.height);
       var key = doc.rev + ':' + S.fi + ':' + app.editor.strokeRev;
       if (cache.key !== key) { cache = { key: key, c: app.editor.compositeCanvas(S.fi) }; }
       var c = cache.c;
@@ -112,7 +119,7 @@
       } else {
         var sc = mode === 'x2' ? 1 : Math.max(1, Math.floor(Math.min((cv.width - 8) / doc.w, (cv.height - 8) / doc.h)));
         var w = doc.w * sc, hh = doc.h * sc, x = Math.round((cv.width - w) / 2), y = Math.round((cv.height - hh) / 2);
-        g.fillStyle = '#1a1e30'; g.fillRect(x, y, w, hh); g.drawImage(c, x, y, w, hh);
+        g.fillStyle = cs.getPropertyValue('--check-b').trim() || '#231a29'; g.fillRect(x, y, w, hh); g.drawImage(c, x, y, w, hh);
       }
     }
     S.onChange(function () { draw(); }); draw(); el.draw = draw;
@@ -144,7 +151,7 @@
       grid.appendChild(h('div', { class: 'tl-cell corner lbl' }, 'Tags'));
       var lane = h('div', { class: 'tl-lane', style: { gridColumn: '2 / span ' + nf, gridTemplateColumns: 'repeat(' + nf + ', 30px)' } });
       doc.tags.forEach(function (t) {
-        lane.appendChild(h('button', { class: 'tag', style: { gridColumn: (t.from + 1) + ' / ' + (t.to + 2), background: t.color }, title: t.name + ' (' + t.dir + ')', onclick: function () { range = [t.from, t.to]; S.setFrame(t.from); refresh(); }, ondblclick: function () { app.editTag(t); } }, t.name));
+        lane.appendChild(h('button', { class: 'tag', style: { gridColumn: (t.from + 1) + ' / ' + (t.to + 2), background: t.color, color: tagInk(t.color) }, title: t.name + ' (' + t.dir + ')', onclick: function () { range = [t.from, t.to]; S.setFrame(t.from); refresh(); }, ondblclick: function () { app.editTag(t); } }, t.name));
       });
       grid.appendChild(lane);
       // header
@@ -229,5 +236,5 @@
     return el;
   }
 
-  return { Toolbox: Toolbox, PalettePanel: PalettePanel, OptionsPanel: OptionsPanel, PreviewPanel: PreviewPanel, Timeline: Timeline, AIPanel: AIPanel, swatchCSS: swatchCSS };
+  return { Toolbox: Toolbox, PalettePanel: PalettePanel, OptionsPanel: OptionsPanel, PreviewPanel: PreviewPanel, Timeline: Timeline, AIPanel: AIPanel, swatchCSS: swatchCSS, tagInk: tagInk };
 });

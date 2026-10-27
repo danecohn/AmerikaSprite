@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
-Name=Cohnsoft Sprite
+Name=Vigil Sprite
 GenericName=Pixel Art Editor
 Comment=Pixel-art editor and animator with an AI sprite builder
 Exec=amerika-sprite %F
-Icon=artemis-sprite
+Icon=vigil-sprite
 Terminal=false
 Categories=Graphics;2DGraphics;RasterGraphics;
 Keywords=pixel;sprite;art;animation;tileset;ai;

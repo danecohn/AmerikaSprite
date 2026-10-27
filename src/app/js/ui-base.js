@@ -78,11 +78,20 @@
   }
   /** <span class="ico"> element showing the bitmap icon in the theme's colours (follows CSS vars at creation time) */
   function icon(name, size) {
-    var cs = getComputedStyle(document.documentElement), col = cs.getPropertyValue('--ico').trim() || '#c9d1f2', acc = cs.getPropertyValue('--ico-accent').trim() || '#18d0ff';
+    var cs = getComputedStyle(document.documentElement), col = cs.getPropertyValue('--ico').trim() || '#17101a', acc = cs.getPropertyValue('--ico-accent').trim() || '#a8003a';
     var el = h('span', { class: 'ico', 'aria-hidden': 'true' });
     el.style.backgroundImage = 'url(' + iconURL(name, col, acc) + ')'; el.style.width = el.style.height = ((size || 1) * 11 * 2) + 'px';
     el.style.backgroundSize = '100% 100%'; el.dataset.name = name;
     return el;
+  }
+  /** pixel icons are drawn in the theme colours at creation; redraw them when light/dark changes */
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var recolour = function () {
+      var cs = getComputedStyle(document.documentElement), col = cs.getPropertyValue('--ico').trim(), acc = cs.getPropertyValue('--ico-accent').trim();
+      document.querySelectorAll('.ico[data-name]').forEach(function (el) { el.style.backgroundImage = 'url(' + iconURL(el.dataset.name, col, acc) + ')'; });
+    };
+    if (mq.addEventListener) mq.addEventListener('change', function () { setTimeout(recolour, 0); });
   }
 
   // ---------------------------------------------------------------- toasts

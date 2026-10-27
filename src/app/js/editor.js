@@ -71,17 +71,27 @@
     var g = c.getContext('2d'), rgba = doc.composite(fi);
     g.putImageData(new ImageData(new Uint8ClampedArray(rgba.buffer.slice(0)), doc.w, doc.h), 0, 0); return c;
   };
+  /** workspace colours follow the VigilTech light/dark theme (CSS custom properties on :root) */
+  P.theme = function () {
+    var key = document.documentElement.getAttribute('data-theme') + ':' + (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (this.themeKey !== key) {
+      var cs = getComputedStyle(document.documentElement), v = function (n, d) { return cs.getPropertyValue(n).trim() || d; };
+      this.themeKey = key; this.checker = null; this.dirty = true;
+      this.th = { work: v('--work', '#120a14'), a: v('--check-a', '#2a2230'), b: v('--check-b', '#221a27'), grid: v('--grid-line', 'rgba(255,255,255,0.09)'), tile: v('--tile-line', 'rgba(255,77,134,0.7)') };
+    }
+    return this.th;
+  };
   P.checkerPattern = function () {
     if (this.checker) return this.checker;
-    var c = document.createElement('canvas'); c.width = c.height = 16; var g = c.getContext('2d');
-    g.fillStyle = '#2a2f45'; g.fillRect(0, 0, 16, 16); g.fillStyle = '#20243a'; g.fillRect(0, 0, 8, 8); g.fillRect(8, 8, 8, 8);
+    var t = this.theme(), c = document.createElement('canvas'); c.width = c.height = 16; var g = c.getContext('2d');
+    g.fillStyle = t.a; g.fillRect(0, 0, 16, 16); g.fillStyle = t.b; g.fillRect(0, 0, 8, 8); g.fillRect(8, 8, 8, 8);
     this.checker = this.ctx.createPattern(c, 'repeat'); return this.checker;
   };
   P.render = function () {
     var S = this.S, doc = S.doc, g = this.ctx, z = this.zoom, w = doc.w, h = doc.h, dpr = this.dpr;
     if (!this.cw) return;
     g.setTransform(dpr, 0, 0, dpr, 0, 0); g.imageSmoothingEnabled = false;
-    g.fillStyle = '#0a0c14'; g.fillRect(0, 0, this.cw, this.ch);
+    var th = this.theme(); g.fillStyle = th.work; g.fillRect(0, 0, this.cw, this.ch);
     var key = doc.rev + ':' + S.fi + ':' + this.strokeRev;
     if (this.dirty || this.cache.key !== key) {
       this.cache = { key: key, canvas: this.compositeCanvas(S.fi) }; this.dirty = false; this.onionCache = {};
@@ -100,13 +110,13 @@
     g.globalAlpha = 1;
     // grids
     if (this.showPixelGrid && z >= 6) {
-      g.strokeStyle = 'rgba(255,255,255,0.09)'; g.lineWidth = 1; g.beginPath();
+      g.strokeStyle = th.grid; g.lineWidth = 1; g.beginPath();
       for (var gx = 0; gx <= w; gx++) { g.moveTo(Math.round(ox + gx * z) + 0.5, oy); g.lineTo(Math.round(ox + gx * z) + 0.5, oy + h * z); }
       for (var gy = 0; gy <= h; gy++) { g.moveTo(ox, Math.round(oy + gy * z) + 0.5); g.lineTo(ox + w * z, Math.round(oy + gy * z) + 0.5); }
       g.stroke();
     }
     if (this.showGrid && this.gridW > 0 && this.gridH > 0) {
-      g.strokeStyle = 'rgba(24,208,255,0.55)'; g.beginPath();
+      g.strokeStyle = th.tile; g.beginPath();
       for (var cx = 0; cx <= w; cx += this.gridW) { g.moveTo(Math.round(ox + cx * z) + 0.5, oy); g.lineTo(Math.round(ox + cx * z) + 0.5, oy + h * z); }
       for (var cy = 0; cy <= h; cy += this.gridH) { g.moveTo(ox, Math.round(oy + cy * z) + 0.5); g.lineTo(ox + w * z, Math.round(oy + cy * z) + 0.5); }
       g.stroke();
