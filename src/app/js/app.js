@@ -3,7 +3,7 @@
   'use strict';
   var AS = window.AS, U = AS.ui, h = U.h, C = AS.color, M = AS.model, D = AS.draw, PNG = AS.png, X = AS.exporter, Tools = AS.tools, E = AS.editor, P = AS.panels;
   var shell = window.amerikaStudio;
-  var VERSION = '1.0.0';
+  var VERSION = '1.0.1';
 
   var DEFAULT_KEYS = {
     'file.new': 'ctrl+n', 'file.open': 'ctrl+o', 'file.save': 'ctrl+s', 'file.saveAs': 'ctrl+shift+s', 'file.export': 'ctrl+e',
@@ -42,8 +42,8 @@
     });
   };
   A.setTitle = function () {
-    var doc = this.S.doc; document.title = doc.name + ' - Sprite';
-    if (shell && shell.window) { try { shell.window.setTitle(doc.name + (doc.dirty() ? ' *' : '')); shell.window.setDirty(doc.dirty()); } catch (e) {} }
+    var doc = this.S.doc; document.title = doc.name + ' - Cohnsoft Sprite';
+    if (shell && shell.window) { try { shell.window.setTitle(doc.name + (doc.dirty() ? ' *' : '') + ' — Cohnsoft Sprite'); shell.window.setDirty(doc.dirty()); } catch (e) {} }
     if (this.titleEl) this.titleEl.textContent = doc.name + (doc.dirty() ? ' *' : '');
   };
   A.confirmDiscard = async function () { if (!this.S.doc.dirty()) return true; return U.confirmBox('Unsaved changes', 'Discard the changes to "' + this.S.doc.name + '"?', 'Discard'); };
@@ -331,9 +331,9 @@
     // help
     'help.keys': function () { return this.keysDialog(); },
     'help.about': function () {
-      return U.dialog({ title: 'About Sprite', cancel: false, ok: 'Close', fields: [
-        { type: 'note', text: 'Sprite ' + VERSION + ' - a pixel-art editor with an AI sprite builder, part of Studio (Developer Edition).' },
-        { type: 'note', text: 'Original code by Artemis Softworks LLC, founded by Demetria Althea Cohn. Sprite is not Aseprite and is not affiliated with Aseprite or Igara Studio. It can read (import only) the documented .aseprite file format so you can bring your files in; it never writes it.' },
+      return U.dialog({ title: 'About Cohnsoft Sprite', cancel: false, ok: 'Close', fields: [
+        { type: 'note', text: 'Cohnsoft Sprite ' + VERSION + ' - a pixel-art editor with an AI sprite builder, part of Studio (Developer Edition).' },
+        { type: 'note', text: 'Original code by Cohnsoft, founded by Demetria Althea Cohn. Sprite is not Aseprite and is not affiliated with Aseprite or Igara Studio. It can read (import only) the documented .aseprite file format so you can bring your files in; it never writes it.' },
         { type: 'note', text: 'Your project files are .asprite.json. Exports: PNG, GIF, APNG, sprite sheets with Aseprite-compatible JSON and Godot SpriteFrames (.tres).' }] });
     }
   };
@@ -435,7 +435,7 @@
         it('Mirror X (vertical axis)', 'symX', { checked: function () { return e.sym.x; } }), it('Mirror Y (horizontal axis)', 'symY', { checked: function () { return e.sym.y; } }), '-',
         { label: 'Tiled mode: off', action: 'setTile', arg: 'off', checked: function () { return e.tile === 'off'; } }, { label: 'Tiled mode: horizontal', action: 'setTile', arg: 'x', checked: function () { return e.tile === 'x'; } }, { label: 'Tiled mode: vertical', action: 'setTile', arg: 'y', checked: function () { return e.tile === 'y'; } }, { label: 'Tiled mode: both', action: 'setTile', arg: 'xy', checked: function () { return e.tile === 'xy'; } }, '-',
         it('Mouse wheel pans (touchpad)', 'toggleWheel', { checked: function () { return e.wheelPans; } }), it('Show / hide side panels', 'toggleDocks')]; } },
-      { label: 'Help', items: [it('Keyboard shortcuts...', 'help.keys'), it('About Sprite', 'help.about')] }
+      { label: 'Help', items: [it('Keyboard shortcuts...', 'help.keys'), it('About Cohnsoft Sprite', 'help.about')] }
     ];
   };
   ACTIONS.quit = function () { if (shell && shell.window && shell.window.close) shell.window.close(); };
@@ -462,7 +462,7 @@
     var menubar = U.buildMenubar(this.menuSpec(), function (a, arg) { self.act(a, arg); }, function (a) { var k = self.keymap.map[a]; return k ? U.prettyKey(k) : ''; });
     this.menubar = menubar;
     this.titleEl = h('span', { class: 'doc-title' }, S.doc.name);
-    var logo = h('div', { class: 'brand' }, h('img', { src: 'icon.svg', alt: '', width: 22, height: 22 }), h('span', { class: 'bname' }, 'AMERIKA ', h('b', null, 'SPRITE')));
+    var logo = h('div', { class: 'brand' }, h('img', { src: 'icon.svg', alt: '', width: 22, height: 22 }), h('span', { class: 'bname' }, 'Cohnsoft ', h('b', null, 'Sprite')));
     var undoB = h('button', { class: 'tool tiny', title: 'Undo (Ctrl+Z)', 'aria-label': 'Undo', onclick: function () { self.act('undo'); } }, '↶'), redoB = h('button', { class: 'tool tiny', title: 'Redo (Ctrl+Y)', 'aria-label': 'Redo', onclick: function () { self.act('redo'); } }, '↷');
     var top = h('header', { class: 'top' }, logo, menubar, h('span', { class: 'grow' }), this.titleEl, undoB, redoB);
     // view strip
@@ -530,6 +530,6 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var app = new App(); window.amerikaSprite = app;
-    try { app.build(); app.install(); } catch (e) { document.body.appendChild(h('pre', { class: 'fatal' }, 'Sprite failed to start: ' + (e && e.stack || e))); console.error(e); }
+    try { app.build(); app.install(); } catch (e) { document.body.appendChild(h('pre', { class: 'fatal' }, 'Cohnsoft Sprite failed to start: ' + (e && e.stack || e))); console.error(e); }
   });
 })();

@@ -6,9 +6,9 @@ def register(b):
     def build():
         src = b.OS / 'sprite'
         p = b.Pkg('amerika-sprite', b.DE_VERSION,
-                  'Sprite\nA pixel-art editor and animator with an AI sprite builder (original code; not Aseprite). '
+                  'Cohnsoft Sprite\nA pixel-art editor and animator with an AI sprite builder (original code; not Aseprite). '
                   'Layers, frames, tags, palettes, sprite sheets with Godot SpriteFrames export, GIF, and read-only .aseprite import.',
-                  arch='all', title='Sprite', category='Graphics', section='graphics',
+                  arch='all', title='Cohnsoft Sprite', category='Graphics', section='graphics',
                   depends=f'amerika-studio (>= {b.DE_VERSION}), gir1.2-webkit-6.0')
         shutil.copytree(src / 'app', p.path('/usr/share/amerika-sprite/app'), ignore=shutil.ignore_patterns('__pycache__', '*.pyc'))
         p.copy(src / 'bin/amerika-sprite', '/usr/bin/amerika-sprite', 0o755)
