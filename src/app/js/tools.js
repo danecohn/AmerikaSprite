@@ -2,7 +2,8 @@
    Every tool call is applied through doc.edit() (atomic: a failing call changes nothing). Original code. */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory(function (n) { return require('./' + n + '.js'); });
-  else { root.AS = root.AS || {}; root.AS.tools = factory(function (n) { return root.AS[n]; }); }
+  // in the page export.js registers as AS.exporter (the file is export.js, which is what Node requires)
+  else { root.AS = root.AS || {}; root.AS.tools = factory(function (n) { return root.AS[n === 'export' ? 'exporter' : n]; }); }
 })(typeof window !== 'undefined' ? window : globalThis, function (dep) {
   'use strict';
   var M = dep('model'), C = dep('color'), D = dep('draw'), PNG = dep('png'), GIF = dep('gif'), X = dep('export');
